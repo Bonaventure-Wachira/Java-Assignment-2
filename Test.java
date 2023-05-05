@@ -1,56 +1,42 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class Test {
     public static void main(String[] args) {
-        // Test Entry class
-        Entry<String, Integer> entry = new Entry<>("Hello", 42);
-        System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        CustomHashMap<String, Integer> customMap = new CustomHashMap<>();
+        customMap.set("Hello", 42);
 
-        // Test CustomHashMap class
-        CustomHashMap<DijkstraGraphNode, Integer> hashMap = new CustomHashMap<>();
-
-        // Create some DijkstraGraphNode instances for testing
-        DijkstraGraphNode node1 = new DijkstraGraphNode("1", true);
-        DijkstraGraphNode node2 = new DijkstraGraphNode("2", true);
+        DijkstraGraphNode node1 = new DijkstraGraphNode("1", false);
+        DijkstraGraphNode node2 = new DijkstraGraphNode("2", false);
         DijkstraGraphNode node3 = new DijkstraGraphNode("3", false);
 
-        // Test set method
-        hashMap.set(node1, 10);
-        hashMap.set(node2, 20);
-        hashMap.set(node3, 30);
-
-        // Test getValue method
-        System.out.println("Value of node1: " + hashMap.getValue(node1));
-        System.out.println("Value of node2: " + hashMap.getValue(node2));
-        System.out.println("Value of node3: " + hashMap.getValue(node3));
-
-        // Test hasKey method
-        System.out.println("Has node1? " + hashMap.hasKey(node1));
-        System.out.println("Has node2? " + hashMap.hasKey(node2));
-        System.out.println("Has node3? " + hashMap.hasKey(node3));
-
-        // Test MinPriorityQueue class
         MinPriorityQueue queue = new MinPriorityQueue();
-
-        // Insert DijkstraGraphNodes into the MinPriorityQueue
         queue.insert(node1);
         queue.insert(node2);
         queue.insert(node3);
 
-        // Test isEmpty() method
-        System.out.println("Is the queue empty? " + queue.isEmpty());
+        node1.priority = 10;
+        node2.priority = 20;
+        node3.priority = 30;
 
-        // Test pullHighestPriorityElement() method
-        DijkstraGraphNode highestPriority = queue.pullHighestPriorityElement();
-        System.out.println("Highest priority element: " + highestPriority.getId());
-
-        // Test rebalance() method (change priority and rebalance)
-        node1.priority = 5;
-        queue.rebalance(node1);
-        highestPriority = queue.pullHighestPriorityElement();
-        System.out.println("New highest priority element: " + highestPriority.getId());
-
-        // Test if CustomHashMap contains nodes
-        System.out.println("Has node1? " + hashMap.hasKey(node1));
-        System.out.println("Has node2? " + hashMap.hasKey(node2));
-        System.out.println("Has node3? " + hashMap.hasKey(node3));
+        try (PrintWriter writer = new PrintWriter(new File("answer.txt"))) {
+            writer.println("Key: Hello, Value: " + customMap.getValue("Hello"));
+            writer.println("Value of node1: " + queue.priority(node1));
+            writer.println("Value of node2: " + queue.priority(node2));
+            writer.println("Value of node3: " + queue.priority(node3));
+            writer.println("Has node1? " + queue.contains(node1));
+            writer.println("Has node2? " + queue.contains(node2));
+            writer.println("Has node3? " + queue.contains(node3));
+            writer.println("Is the queue empty? " + queue.isEmpty());
+            writer.println("Highest priority element: " + queue.extract_min().getId());
+            writer.println("New highest priority element: " + queue.extract_min().getId());
+            writer.println("Has node1? " + queue.contains(node1));
+            writer.println("Has node2? " + queue.contains(node2));
+            writer.println("Has node3? " + queue.contains(node3));
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Unable to create answer.txt file");
+            e.printStackTrace();
+        }
     }
 }

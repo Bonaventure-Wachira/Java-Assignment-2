@@ -1,0 +1,13 @@
+Key: Hello, Value: 42
+Value of node1: 10
+Value of node2: 20
+Value of node3: 30
+Has node1? true
+Has node2? true
+Has node3? true
+Is the queue empty? false
+Highest priority element: 1
+New highest priority element: 2
+Has node1? false
+Has node2? false
+Has node3? true

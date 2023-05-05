@@ -82,4 +82,18 @@ public class MinPriorityQueue {
         heap.set(index1, heap.get(index2));
         heap.set(index2, temp);
     }
+
+    public int priority(DijkstraGraphNode node) {
+        int index = heap.indexOf(node);
+        return heap.get(index).priority;
+    }
+    
+    public boolean contains(DijkstraGraphNode node) {
+        return heap.contains(node);
+    }
+    
+    public DijkstraGraphNode extract_min() {
+        return pullHighestPriorityElement();
+    }
+    
 }
