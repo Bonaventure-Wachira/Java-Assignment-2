@@ -1,13 +1,32 @@
+// Name 
+// Email
+
+
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * DijkstraAlgorithm is an implementation of Dijkstra's shortest path algorithm.
+ * It calculates the shortest path from a source node to all other nodes in a graph.
+ */
 public class DijkstraAlgorithm {
     private Graph graph;
 
+    /**
+     * Constructs a DijkstraAlgorithm instance with a given graph.
+     *
+     * @param graph the graph for which the shortest paths are to be calculated
+     */
     public DijkstraAlgorithm(Graph graph) {
         this.graph = graph;
     }
 
+    /**
+     * Computes the shortest path from the source node to all other nodes in the graph.
+     *
+     * @param source the source node from which the shortest paths are calculated
+     * @return a CustomHashMap mapping GraphNode to their shortest path distances from the source node
+     */
     public CustomHashMap<GraphNode, Integer> shortestPath(DijkstraGraphNode source) {
         MinPriorityQueue queue = new MinPriorityQueue();
         CustomHashMap<GraphNode, Integer> distances = new CustomHashMap<>();
